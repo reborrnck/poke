@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var dialogue_lines: Array[String] = ["Hello, Trainer!", "Good luck on your journey!"]
 
 var _player_nearby: bool = false
-var _cooldown: bool = false
 
 
 func _ready() -> void:
@@ -25,18 +24,12 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not _player_nearby or _cooldown:
+	if not _player_nearby:
 		return
-
+	if Events.dialogue_active:
+		return
 	if Input.is_action_just_pressed("ui_accept"):
-		_talk()
-
-
-func _talk() -> void:
-	Events.show_dialogue.emit(npc_name, dialogue_lines)
-	_cooldown = true
-	await get_tree().create_timer(0.3).timeout
-	_cooldown = false
+		Events.show_dialogue.emit(npc_name, dialogue_lines)
 
 
 func _on_interact_area_body_entered(body: Node2D) -> void:

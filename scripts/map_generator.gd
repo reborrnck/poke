@@ -22,7 +22,7 @@ enum T {
 	FENCE_V = 11,
 }
 
-const MAP_DATA := [
+const MAP_DATA: Array[Array] = [
 	[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
 	[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
 	[0,0,0,0,0,0,6,0,6,6,0,0,0,6,6,0,0,0,6,6,0,6,6,0,0,0,0,0,0,0],
@@ -53,10 +53,10 @@ func _ready() -> void:
 
 func generate() -> void:
 	clear()
-	for y in range(MAP_DATA.size()):
-		var row := MAP_DATA[y]
-		for x in range(row.size()):
-			var tile_id := row[x]
+	for y: int in range(MAP_DATA.size()):
+		var row: Array = MAP_DATA[y]
+		for x: int in range(row.size()):
+			var tile_id: int = row[x]
 			if tile_id == T.NONE:
 				continue
 			set_cell(Vector2i(x, y), 0, Vector2i(tile_id, 0))

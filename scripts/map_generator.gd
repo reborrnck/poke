@@ -22,6 +22,10 @@ enum T {
 	FENCE_V = 11,
 }
 
+const SOLID_TILES: Array[int] = [
+	T.WATER, T.TRUNK, T.TREE_TOP, T.WALL, T.ROOF, T.FENCE_H, T.FENCE_V
+]
+
 const MAP_DATA: Array[Array] = [
 	[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
 	[3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],
@@ -48,7 +52,29 @@ const MAP_DATA: Array[Array] = [
 
 func _ready() -> void:
 	if auto_generate and tile_set:
+		_setup_collisions()
 		generate()
+
+
+func _setup_collisions() -> void:
+	# Add physics collision to solid tiles (the .tres lost hand-edited data)
+	var ts := tile_set
+	if ts.get_source_count() == 0:
+		return
+	var src_id := 0
+	for tile_id: int in SOLID_TILES:
+		var coords := Vector2i(tile_id, 0)
+		var td := ts.get_tile_data(src_id, coords, 0)
+		if td == null:
+			td = TileData.new()
+		td.set_collision_polygons_count(0, 1)
+		td.set_collision_polygon_points(0, 0, PackedVector2Array([
+			Vector2(0, 0),
+			Vector2(TILE_SIZE, 0),
+			Vector2(TILE_SIZE, TILE_SIZE),
+			Vector2(0, TILE_SIZE),
+		]))
+		ts.set_tile_data(src_id, coords, td)
 
 
 func generate() -> void:

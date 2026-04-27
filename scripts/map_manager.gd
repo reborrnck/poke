@@ -14,6 +14,10 @@ func _ready() -> void:
 
 func change_scene(path: String, spawn_point: String = "") -> void:
 	_pending_spawn = spawn_point
+	call_deferred("_do_change_scene", path)
+
+
+func _do_change_scene(path: String) -> void:
 	get_tree().change_scene_to_file(path)
 
 

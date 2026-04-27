@@ -53,3 +53,4 @@ func _hide() -> void:
 	_lines.clear()
 	_index = 0
 	Events.toggle_player.emit(true)
+	Events.dialogue_ended.emit()

@@ -4,9 +4,12 @@ extends CharacterBody2D
 @export var dialogue_lines: Array[String] = ["Hello, Trainer!", "Good luck on your journey!"]
 
 var _player_nearby: bool = false
+var _can_trigger: bool = true
 
 
 func _ready() -> void:
+	Events.dialogue_ended.connect(_enable_trigger)
+
 	var img := Image.create(28, 32, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0.3, 0.5, 0.8, 1.0))
 	for y in range(6, 12):
@@ -24,11 +27,16 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if not _player_nearby:
+	if not _player_nearby or not _can_trigger:
 		return
 	if event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
+		_can_trigger = false
 		Events.show_dialogue.emit(npc_name, dialogue_lines)
+
+
+func _enable_trigger() -> void:
+	_can_trigger = true
 
 
 func _on_interact_area_body_entered(body: Node2D) -> void:
@@ -39,3 +47,4 @@ func _on_interact_area_body_entered(body: Node2D) -> void:
 func _on_interact_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		_player_nearby = false
+		_can_trigger = true

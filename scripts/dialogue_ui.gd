@@ -30,7 +30,6 @@ func _show(_npc_name: String, lines: Array[String]) -> void:
 	_index = 0
 	_panel.visible = true
 	_active = true
-	Events.dialogue_active = true
 	Events.toggle_player.emit(false)
 	_show_current_line()
 
@@ -54,9 +53,3 @@ func _hide() -> void:
 	_lines.clear()
 	_index = 0
 	Events.toggle_player.emit(true)
-	# Defer reset so same-frame _physics_process can't re-trigger the NPC
-	call_deferred("_reset_dialogue_flag")
-
-
-func _reset_dialogue_flag() -> void:
-	Events.dialogue_active = false

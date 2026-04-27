@@ -23,12 +23,11 @@ func _ready() -> void:
 	$CollisionShape2D.shape = shape
 
 
-func _physics_process(_delta: float) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if not _player_nearby:
 		return
-	if Events.dialogue_active:
-		return
-	if Input.is_action_just_pressed("ui_accept"):
+	if event.is_action_pressed("ui_accept"):
+		get_viewport().set_input_as_handled()
 		Events.show_dialogue.emit(npc_name, dialogue_lines)
 
 

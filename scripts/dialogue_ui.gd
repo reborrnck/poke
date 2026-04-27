@@ -53,5 +53,10 @@ func _hide() -> void:
 	_active = false
 	_lines.clear()
 	_index = 0
-	Events.dialogue_active = false
 	Events.toggle_player.emit(true)
+	# Defer reset so same-frame _physics_process can't re-trigger the NPC
+	call_deferred("_reset_dialogue_flag")
+
+
+func _reset_dialogue_flag() -> void:
+	Events.dialogue_active = false

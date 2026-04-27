@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/portal.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/dialogue_ui.tscn" id="2"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 16)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(640, 16)
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(16, 480)
+
+[node name="HouseInterior" type="Node2D"]
+
+[node name="Floor" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.85, 0.8, 0.7, 1)
+
+[node name="Carpet" type="ColorRect" parent="."]
+position = Vector2(220, 280)
+size = Vector2(200, 120)
+color = Color(0.7, 0.2, 0.2, 1)
+
+[node name="SpawnHere" type="Marker2D" parent="." groups=["spawn_point"]]
+position = Vector2(320, 360)
+
+[node name="ExitPortal" type="Area2D" parent="."]
+position = Vector2(320, 450)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1")
+target_scene = "res://scenes/main.tscn"
+target_spawn = "house_exit"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitPortal"]
+shape = SubResource("1")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_layer = 1
+collision_mask = 1
+
+[node name="TopWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(320, 8)
+shape = SubResource("2")
+
+[node name="BottomWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(320, 472)
+shape = SubResource("2")
+
+[node name="LeftWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(8, 240)
+shape = SubResource("3")
+
+[node name="RightWall" type="CollisionShape2D" parent="Walls"]
+position = Vector2(632, 240)
+shape = SubResource("3")
+
+[node name="VisualWalls" type="Node2D" parent="."]
+
+[node name="TopWallVis" type="ColorRect" parent="VisualWalls"]
+position = Vector2(0, 0)
+size = Vector2(640, 16)
+color = Color(0.55, 0.5, 0.45, 1)
+
+[node name="BottomWallVis" type="ColorRect" parent="VisualWalls"]
+position = Vector2(0, 464)
+size = Vector2(640, 16)
+color = Color(0.55, 0.5, 0.45, 1)
+
+[node name="LeftWallVis" type="ColorRect" parent="VisualWalls"]
+position = Vector2(0, 0)
+size = Vector2(16, 480)
+color = Color(0.55, 0.5, 0.45, 1)
+
+[node name="RightWallVis" type="ColorRect" parent="VisualWalls"]
+position = Vector2(624, 0)
+size = Vector2(16, 480)
+color = Color(0.55, 0.5, 0.45, 1)
+
+[node name="DialogueUI" parent="." instance=ExtResource("2")]

@@ -58,6 +58,11 @@ ui_down={
 ]
 }
 
+[autoload]
+
+Events="*res://scripts/events.gd"
+MapManager="*res://scripts/map_manager.gd"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

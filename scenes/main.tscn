@@ -1,11 +1,74 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://cmain0000000000000000000000001"]
 
-[ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cplayer000000000000000000000001" path="res://scenes/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cnpc0000000000000000000000000001" path="res://scenes/npc.tscn" id="2"]
+[ext_resource type="Script" path="res://scripts/map_generator.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/portal.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://cdialogueui00000000000000000001" path="res://scenes/dialogue_ui.tscn" id="5"]
+[ext_resource type="TileSet" path="res://resources/tileset.tres" id="6"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(32, 8)
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(32, 8)
 
 [node name="Main" type="Node2D"]
 
+[node name="GroundTileMap" type="TileMapLayer" parent="."]
+tile_set = ExtResource("6")
+script = ExtResource("3")
+
 [node name="Player" parent="." instance=ExtResource("1")]
-position = Vector2(320, 240)
+position = Vector2(400, 288)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(320, 240)
+position = Vector2(400, 288)
+
+[node name="DialogueUI" parent="." instance=ExtResource("5")]
+
+[node name="NPCs" type="Node2D" parent="."]
+
+[node name="ProfOak" parent="NPCs" instance=ExtResource("2")]
+position = Vector2(272, 224)
+npc_name = "Oak 博士"
+dialogue_lines = Array[String](["欢迎来到精灵世界！", "这个世界充满了神奇的生物...", "去冒险吧，年轻人！"])
+
+[node name="Shopkeeper" parent="NPCs" instance=ExtResource("2")]
+position = Vector2(400, 224)
+npc_name = "商店老板"
+dialogue_lines = Array[String](["欢迎光临！精灵球买二送一！", "需要什么尽管说。"])
+
+[node name="RivalNPC" parent="NPCs" instance=ExtResource("2")]
+position = Vector2(592, 320)
+npc_name = "劲敌"
+dialogue_lines = Array[String](["喂！你也是来抓精灵的吗？", "我可不会输给你！", "下次见面就是对手了！"])
+
+[node name="Portals" type="Node2D" parent="."]
+
+[node name="HouseEntrance" type="Area2D" parent="Portals"]
+position = Vector2(304, 320)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4")
+target_scene = "res://scenes/house_interior.tscn"
+target_spawn = "SpawnHere"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/HouseEntrance"]
+shape = SubResource("1")
+
+[node name="TownExitSouth" type="Area2D" parent="Portals"]
+position = Vector2(160, 592)
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("4")
+target_scene = ""
+target_spawn = ""
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portals/TownExitSouth"]
+shape = SubResource("2")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="house_exit" type="Marker2D" parent="SpawnPoints" groups=["spawn_point"]]
+position = Vector2(304, 340)

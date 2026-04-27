@@ -1,0 +1,36 @@
+[gd_resource type="TileSet" load_steps=6 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/tileset.png" id="1"]
+
+[sub_resource type="TileSetAtlasSource" id="1"]
+texture = ExtResource("1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+3:0/0/physics_layer_0/angle = 0.0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+4:0/0 = 0
+5:0/0 = 0
+5:0/0/physics_layer_0/angle = 0.0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+6:0/0 = 0
+6:0/0/physics_layer_0/angle = 0.0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+7:0/0 = 0
+7:0/0/physics_layer_0/angle = 0.0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+8:0/0 = 0
+8:0/0/physics_layer_0/angle = 0.0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+9:0/0 = 0
+10:0/0 = 0
+10:0/0/physics_layer_0/angle = 0.0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+11:0/0 = 0
+11:0/0/physics_layer_0/angle = 0.0
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 32, 0, 32, 32, 0, 32)
+
+[resource]
+sources/0 = SubResource("1")

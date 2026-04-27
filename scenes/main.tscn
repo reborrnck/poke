@@ -31,18 +31,54 @@ position = Vector2(400, 288)
 
 [node name="ProfOak" parent="NPCs" instance=ExtResource("2")]
 position = Vector2(272, 224)
-npc_name = "Oak 博士"
-dialogue_lines = Array[String](["欢迎来到精灵世界！", "这个世界充满了神奇的生物...", "去冒险吧，年轻人！"])
+npc_name = "Dr. Oak"
+dialogue_lines = Array[String]([
+	"欢迎来到 幻灵世界！我是精灵研究专家 Oak 博士。",
+	"这个世界栖息着一种奇妙的生物——幻灵。它们有着各种各样的形态和能力。",
+	"我们可以捕捉幻灵，训练它们，与它们并肩作战！",
+	"来，先在这座小镇四处走走，和居民们聊聊吧。",
+	"等你准备好了，记得来找我领取属于你的初始幻灵。"
+])
 
 [node name="Shopkeeper" parent="NPCs" instance=ExtResource("2")]
-position = Vector2(400, 224)
-npc_name = "商店老板"
-dialogue_lines = Array[String](["欢迎光临！精灵球买二送一！", "需要什么尽管说。"])
+position = Vector2(400, 230)
+npc_name = "幻灵商店 店主"
+dialogue_lines = Array[String]([
+	"欢迎光临！这里有训练师需要的一切装备！",
+	"幻灵球可是探险的必需品——捉到幻灵就靠它了。",
+	"目前开店特惠：所有幻灵球买二送一！",
+	"隔壁草丛里似乎有不少野生幻灵，去试试运气吧。"
+])
 
-[node name="RivalNPC" parent="NPCs" instance=ExtResource("2")]
-position = Vector2(592, 320)
-npc_name = "劲敌"
-dialogue_lines = Array[String](["喂！你也是来抓精灵的吗？", "我可不会输给你！", "下次见面就是对手了！"])
+[node name="Rival" parent="NPCs" instance=ExtResource("2")]
+position = Vector2(580, 315)
+npc_name = "劲敌 小耀"
+dialogue_lines = Array[String]([
+	"嗨！你也来镇上选初始幻灵？",
+	"哈，我可不会输给你。我已经研究了一个月的幻灵对战了。",
+	"等你拿到幻灵，我们就在镇口来一场对战！",
+	"哼，别到时候输得太难看哦！"
+])
+
+[node name="Granny" parent="NPCs" instance=ExtResource("2")]
+position = Vector2(530, 256)
+npc_name = "慈祥的老奶奶"
+dialogue_lines = Array[String]([
+	"哎呀，是年轻的训练师呀。",
+	"我年轻时也是一名训练师呢，走过了这片大陆的每一个角落。",
+	"年轻真好啊...对了，草丛里有野生幻灵出没，走路要小心。",
+	"如果你受伤了，可以去精灵中心恢复幻灵的体力。"
+])
+
+[node name="KidNPC" parent="NPCs" instance=ExtResource("2")]
+position = Vector2(660, 416)
+npc_name = "憧憬的小孩"
+dialogue_lines = Array[String]([
+	"大哥哥/大姐姐！你是幻灵训练师吗？",
+	"我长大后也想成为一名了不起的训练师！",
+	"我最喜欢火属性的幻灵了，它们特别帅气！",
+	"等我攒够了钱，就去买人生中第一个幻灵球。"
+])
 
 [node name="Portals" type="Node2D" parent="."]
 

@@ -8,7 +8,7 @@ var _can_trigger: bool = true
 
 
 func _ready() -> void:
-	Events.dialogue_ended.connect(_enable_trigger)
+	Events.dialogue_ended.connect(func(): _can_trigger = true)
 
 	var img := Image.create(28, 32, false, Image.FORMAT_RGBA8)
 	img.fill(Color(0.3, 0.5, 0.8, 1.0))
@@ -26,17 +26,16 @@ func _ready() -> void:
 	$CollisionShape2D.shape = shape
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not _player_nearby or not _can_trigger:
+		return
+	if Events.dialogue_active:
 		return
 	if event.is_action_pressed("ui_accept"):
 		get_viewport().set_input_as_handled()
 		_can_trigger = false
+		Events.dialogue_active = true
 		Events.show_dialogue.emit(npc_name, dialogue_lines)
-
-
-func _enable_trigger() -> void:
-	_can_trigger = true
 
 
 func _on_interact_area_body_entered(body: Node2D) -> void:

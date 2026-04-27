@@ -64,7 +64,7 @@ func _setup_collisions() -> void:
 	var src_id := 0
 	for tile_id: int in SOLID_TILES:
 		var coords := Vector2i(tile_id, 0)
-		var td := ts.get_tile_data(src_id, coords, 0)
+		var td: TileData = ts.get_tile_data(src_id, coords, 0)
 		if td == null:
 			td = TileData.new()
 		td.set_collision_polygons_count(0, 1)
